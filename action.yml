@@ -23,6 +23,9 @@ inputs:
   ts-config-path:
     description: "Path of tsconfig file. default is './tsconfig.json'"
     default: './tsconfig.json'
+  custom-tsc:
+    description: "Path of custom tsc. default is 'tsc'"
+    default: ''
   use-check:
     description: 'Report status as a CI Check'
   check-fail-mode:

@@ -85,7 +85,8 @@ async function run(): Promise<void> {
 
     const { output: tscOutputCurrent } = await runTscCli({
       workingDir,
-      tsconfigPath
+      tsconfigPath,
+      customTsc: args.customTsc,
     })
 
     const errorsPr = parseOutputTsc(tscOutputCurrent)
@@ -118,7 +119,8 @@ async function run(): Promise<void> {
 
     const { output: tscOutputBase } = await runTscCli({
       workingDir,
-      tsconfigPath
+      tsconfigPath,
+      customTsc: args.customTsc,
     })
 
     const errorsBaseBranch = parseOutputTsc(tscOutputBase)
