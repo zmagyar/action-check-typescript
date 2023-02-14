@@ -30,8 +30,7 @@ export async function runTscCli({ workingDir, tsconfigPath, files }: Cfg): Promi
 
   const execArgs = [
     `${path.join(workingDir, 'node_modules/typescript/bin/tsc')}`,
-    '--noEmit',
-    '--noErrorTruncation',
+    '--build',
     '--pretty',
     'false',
     '--watch',
