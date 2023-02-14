@@ -34,6 +34,9 @@ inputs:
   debug:
     description: "Set true to log ts errors in base branch and pr branch"
     default: false
+  tsc-working-directory:
+    description: "Working directory for tsc command"
+    default: ""
 runs:
   using: 'node16'
   main: 'dist/index.js'

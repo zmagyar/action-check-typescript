@@ -34,7 +34,10 @@ async function run(): Promise<void> {
     }
 
     const workingDir = path.join(process.cwd(), args.directory)
+    const tscDirectory = args.tscWorkingDirectory ? path.join(process.cwd(), args.tscWorkingDirectory) : workingDir
+
     info(`working directory: ${workingDir}`)
+    info(`tsc working directory: ${tscDirectory}`)
 
     const tsconfigPath = path.join(workingDir, args.tsConfigPath)
     info(`tsconfigPath: ${tsconfigPath}`)
@@ -84,7 +87,7 @@ async function run(): Promise<void> {
     info(`[current branch] : tsconfig raw parsing :\n ${JSON.stringify(rawParsingPr)}`)
 
     const { output: tscOutputCurrent } = await runTscCli({
-      workingDir,
+      workingDir: tscDirectory,
       tsconfigPath
     })
 
@@ -117,7 +120,7 @@ async function run(): Promise<void> {
     startGroup(`[base branch] compile ts files`)
 
     const { output: tscOutputBase } = await runTscCli({
-      workingDir,
+      workingDir: tscDirectory,
       tsconfigPath
     })
 

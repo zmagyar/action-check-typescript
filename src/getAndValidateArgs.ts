@@ -48,6 +48,7 @@ type Args = {
   checkFailMode: CHECK_FAIL_MODE
   outputBehaviour: OUTPUT_BEHAVIOUR
   debug: boolean
+  tscWorkingDirectory: string
 }
 
 export function getAndValidateArgs(): Args {
@@ -62,7 +63,8 @@ export function getAndValidateArgs(): Args {
     useCheck: getBooleanInput('use-check'),
     checkFailMode: getInput('check-fail-mode', { required: true }) as CHECK_FAIL_MODE,
     outputBehaviour: getInput('output-behaviour') as OUTPUT_BEHAVIOUR,
-    debug: getBooleanInput('debug')
+    debug: getBooleanInput('debug'),
+    tscWorkingDirectory: getInput('tsc-working-directory')
   }
 
   if (![
