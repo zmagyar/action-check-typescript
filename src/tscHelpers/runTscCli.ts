@@ -6,6 +6,7 @@ interface Cfg {
   workingDir: string
   tsconfigPath?: string
   files?: string[]
+  tscCommand?: string
 }
 /*
 exemple d'output renvoyé
@@ -13,12 +14,14 @@ exemple d'output renvoyé
 src/main.ts(39,11): error TS1155: 'const' declarations must be initialized.
 src/main.ts(39,11): error TS7005: Variable 'hereIsAUnusedVariableToHaveAnError' implicitly has an 'any' type.
 */
-export async function runTscCli({ workingDir, tsconfigPath, files }: Cfg): Promise<{ output: string, error: string }> {
+export async function runTscCli({ workingDir, tsconfigPath, files, tscCommand }: Cfg): Promise<{ output: string, error: string }> {
 
   let myOutput = ''
   let myError = ''
 
-  const options: ExecOptions = {}
+  const options: ExecOptions = {
+    cwd: workingDir
+  }
   options.listeners = {
     stdout: (data: Buffer) => {
       myOutput += data.toString()
@@ -28,15 +31,16 @@ export async function runTscCli({ workingDir, tsconfigPath, files }: Cfg): Promi
     }
   }
 
-  const execArgs = [
+  const execArgs = tscCommand ? [tscCommand] : [
     `${path.join(workingDir, 'node_modules/typescript/bin/tsc')}`,
-    '--build',
+    '--noEmit',
+    '--noErrorTruncation',
     '--pretty',
     'false',
     '--watch',
     'false'
   ]
-  if (tsconfigPath) {
+  if (!tscCommand && tsconfigPath) {
     execArgs.push('--project', tsconfigPath)
   }
   // si on passe un tableau de filenames, on les sépare par un espace pour les passer au compiler

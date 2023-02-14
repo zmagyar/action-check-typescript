@@ -37,6 +37,9 @@ inputs:
   tsc-working-directory:
     description: "Working directory for tsc command"
     default: ""
+  tsc-command:
+    description: "Command to run tsc"
+    default: ""
 runs:
   using: 'node16'
   main: 'dist/index.js'
