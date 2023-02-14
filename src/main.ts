@@ -39,7 +39,7 @@ async function run(): Promise<void> {
     info(`working directory: ${workingDir}`)
     info(`tsc working directory: ${tscDirectory}`)
 
-    const tsconfigPath = path.join(workingDir, args.tsConfigPath)
+    const tsconfigPath = path.join(tscDirectory, args.tsConfigPath)
     info(`tsconfigPath: ${tsconfigPath}`)
     if (!fs.existsSync(tsconfigPath)) {
       throw new Error(`could not find tsconfig.json at: ${tsconfigPath}`)
