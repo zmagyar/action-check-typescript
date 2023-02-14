@@ -31,7 +31,7 @@ export async function runTscCli({ workingDir, tsconfigPath, files, tscCommand }:
     }
   }
 
-  const execArgs = tscCommand ? [tscCommand] : [
+  const execArgs = tscCommand ? tscCommand.split(' ') : [
     `${path.join(workingDir, 'node_modules/typescript/bin/tsc')}`,
     '--noEmit',
     '--noErrorTruncation',
